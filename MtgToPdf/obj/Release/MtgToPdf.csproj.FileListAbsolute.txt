@@ -1,0 +1,15 @@
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\bin\Release\MtgToPdf.exe.config
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\bin\Release\MtgToPdf.exe
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\bin\Release\MtgToPdf.pdb
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\bin\Release\itextsharp.dll
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\bin\Release\Newtonsoft.Json.dll
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\bin\Release\itextsharp.xml
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\bin\Release\Newtonsoft.Json.xml
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.csprojAssemblyReference.cache
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.MainForm.resources
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.Properties.Resources.resources
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.csproj.GenerateResource.cache
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.csproj.CoreCompileInputs.cache
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.csproj.CopyComplete
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.exe
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Release\MtgToPdf.pdb

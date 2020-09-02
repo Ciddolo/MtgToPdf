@@ -42,3 +42,4 @@ C:\Users\Melania\Desktop\MtgToPdf\MtgToPdf\bin\Debug\itextsharp.xml
 C:\Users\Melania\Desktop\MtgToPdf\MtgToPdf\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Melania\Desktop\MtgToPdf\MtgToPdf\obj\Debug\MtgToPdf.csproj.CopyComplete
 C:\Users\marco\Desktop\MtgToPdf\MtgToPdf\obj\Debug\MtgToPdf.csproj.CoreCompileInputs.cache
+D:\Marco\Wildfirestore\MtgToPdf\MtgToPdf\obj\Debug\MtgToPdf.csproj.CoreCompileInputs.cache

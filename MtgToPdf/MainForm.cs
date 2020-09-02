@@ -90,7 +90,7 @@ namespace MtgToPdf
         }
 
         //MISCELLANEOUS
-        
+
         private SetList DownloadSetList()
         {
             string jsonUrl = SETS_INFO_URL;
@@ -163,7 +163,21 @@ namespace MtgToPdf
 
         public bool LoadJson()
         {
-            Directory.CreateDirectory(destinationPath.Text + "/" + boxSetName.Text);
+            if (string.IsNullOrEmpty(setCode.Text))
+            {
+                MessageBox.Show("Invalid set code!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                Directory.CreateDirectory(destinationPath.Text + "/" + boxSetName.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Error to create the directory", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
             JsonFile = DownloadSet(setCode.Text);
             if (JsonFile == null)
@@ -173,6 +187,7 @@ namespace MtgToPdf
             }
 
             string cards = "";
+            ListOfCards.Clear();
             foreach (Card card in JsonFile.Data.Cards)
             {
                 ListOfCards.Add(card);
@@ -209,24 +224,6 @@ namespace MtgToPdf
 
         //PDF
 
-        public void CreateSetPDF(string path)
-        {
-            if (JsonFile.Data.Cards == null)
-            {
-                MessageBox.Show("Empty cards list!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (JsonFile.Data.Cards.Length <= 0)
-                return;
-
-            foreach (Card card in JsonFile.Data.Cards)
-            {
-                string text = card.Number + " " + card.Name;
-                CreateCardPDF(path, card.Number + " " + card.Name, text);
-            }
-        }
-
         public Document CreateCardPDF(string path, string name, string text)
         {
             iTextSharp.text.Rectangle mySize = new iTextSharp.text.Rectangle(PdfWidth, PdfHeight);
@@ -259,16 +256,38 @@ namespace MtgToPdf
             return doc;
         }
 
-        public Document CreateUniquePDF(string path, string name)
+        public void CreateSinglePdf(string path)
         {
-            if (JsonFile.Data.Cards == null)
+            if (ListOfCards == null)
+            {
+                MessageBox.Show("Empty cards list!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (ListOfCards.Count <= 0)
+            {
+                MessageBox.Show("Empty cards list!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            foreach (Card card in ListOfCards)
+            {
+                string text = card.Number + " " + card.Name;
+                CreateCardPDF(path, card.Number + " " + card.Name, text);
+            }
+        }
+
+        public Document CreateSetPdf(string path)
+        {
+            if (ListOfCards == null)
             {
                 MessageBox.Show("Empty cards list!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
-
-            if (JsonFile.Data.Cards.Length <= 0)
+            if (ListOfCards.Count <= 0)
+            {
+                MessageBox.Show("Empty cards list!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
+            }
 
             iTextSharp.text.Rectangle mySize = new iTextSharp.text.Rectangle(PdfWidth, PdfHeight);
             Document doc = new Document(mySize, PdfMarginLeft, PdfMarginRight, PdfMarginTop, PdfMarginBottom);
@@ -276,9 +295,9 @@ namespace MtgToPdf
             string pdfPath = "";
 
             if (path == "")
-                pdfPath = name + ".pdf";
+                pdfPath = boxSetName.Text + ".pdf";
             else
-                pdfPath = path + @"\0 " + name + ".pdf";
+                pdfPath = path + @"\0 " + boxSetName.Text + ".pdf";
 
             PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
             doc.Open();
@@ -354,12 +373,19 @@ namespace MtgToPdf
             if (!LoadJson())
                 return;
 
+            createButton.Text = "Creating PDF...";
+            createButton.Enabled = false;
+
             GetData();
 
             string folderPath = CreateFolder(destinationPath.Text, boxSetName.Text);
-            CreateSetPDF(folderPath);
-            CreateUniquePDF(folderPath, boxSetName.Text);
+            CreateSetPdf(folderPath);
+            if (checkSingle.Checked)
+                CreateSinglePdf(folderPath);
+
             MessageBox.Show("Complete", boxSetName.Text + " To Pdf", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            createButton.Enabled = true;
+            createButton.Text = "Create";
         }
 
         private void destinationPath_DoubleClick(object sender, EventArgs e)

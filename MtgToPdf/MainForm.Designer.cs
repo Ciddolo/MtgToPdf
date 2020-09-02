@@ -51,6 +51,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.boxSetName = new System.Windows.Forms.ComboBox();
             this.setCode = new System.Windows.Forms.TextBox();
+            this.checkSingle = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // destinationPath
@@ -59,7 +61,7 @@
             this.destinationPath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.destinationPath.Name = "destinationPath";
             this.destinationPath.Size = new System.Drawing.Size(300, 22);
-            this.destinationPath.TabIndex = 1;
+            this.destinationPath.TabIndex = 2;
             this.destinationPath.DoubleClick += new System.EventHandler(this.destinationPath_DoubleClick);
             // 
             // jsonPath
@@ -69,7 +71,7 @@
             this.jsonPath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.jsonPath.Name = "jsonPath";
             this.jsonPath.Size = new System.Drawing.Size(191, 22);
-            this.jsonPath.TabIndex = 3;
+            this.jsonPath.TabIndex = 4;
             this.jsonPath.DoubleClick += new System.EventHandler(this.jsonPath_DoubleClick);
             // 
             // createButton
@@ -78,7 +80,7 @@
             this.createButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(301, 23);
-            this.createButton.TabIndex = 11;
+            this.createButton.TabIndex = 12;
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
             this.createButton.Click += new System.EventHandler(this.createButton_Click);
@@ -116,7 +118,7 @@
             this.fontSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fontSize.Name = "fontSize";
             this.fontSize.Size = new System.Drawing.Size(80, 22);
-            this.fontSize.TabIndex = 4;
+            this.fontSize.TabIndex = 5;
             // 
             // label4
             // 
@@ -151,7 +153,7 @@
             this.width.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.width.Name = "width";
             this.width.Size = new System.Drawing.Size(80, 22);
-            this.width.TabIndex = 5;
+            this.width.TabIndex = 6;
             // 
             // height
             // 
@@ -159,7 +161,7 @@
             this.height.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.height.Name = "height";
             this.height.Size = new System.Drawing.Size(80, 22);
-            this.height.TabIndex = 6;
+            this.height.TabIndex = 7;
             // 
             // label7
             // 
@@ -185,7 +187,7 @@
             this.marginTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.marginTop.Name = "marginTop";
             this.marginTop.Size = new System.Drawing.Size(145, 22);
-            this.marginTop.TabIndex = 9;
+            this.marginTop.TabIndex = 10;
             // 
             // label9
             // 
@@ -202,7 +204,7 @@
             this.marginLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.marginLeft.Name = "marginLeft";
             this.marginLeft.Size = new System.Drawing.Size(145, 22);
-            this.marginLeft.TabIndex = 7;
+            this.marginLeft.TabIndex = 8;
             // 
             // marginRight
             // 
@@ -210,7 +212,7 @@
             this.marginRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.marginRight.Name = "marginRight";
             this.marginRight.Size = new System.Drawing.Size(145, 22);
-            this.marginRight.TabIndex = 8;
+            this.marginRight.TabIndex = 9;
             // 
             // label10
             // 
@@ -227,7 +229,7 @@
             this.marginBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.marginBottom.Name = "marginBottom";
             this.marginBottom.Size = new System.Drawing.Size(145, 22);
-            this.marginBottom.TabIndex = 10;
+            this.marginBottom.TabIndex = 11;
             // 
             // label11
             // 
@@ -243,7 +245,7 @@
             this.boxSetName.FormattingEnabled = true;
             this.boxSetName.Location = new System.Drawing.Point(15, 30);
             this.boxSetName.Name = "boxSetName";
-            this.boxSetName.Size = new System.Drawing.Size(300, 24);
+            this.boxSetName.Size = new System.Drawing.Size(276, 24);
             this.boxSetName.TabIndex = 0;
             this.boxSetName.SelectedValueChanged += new System.EventHandler(this.boxSetName_SelectedValueChanged);
             // 
@@ -253,13 +255,34 @@
             this.setCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.setCode.Name = "setCode";
             this.setCode.Size = new System.Drawing.Size(80, 22);
-            this.setCode.TabIndex = 2;
+            this.setCode.TabIndex = 3;
+            // 
+            // checkSingle
+            // 
+            this.checkSingle.AutoSize = true;
+            this.checkSingle.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.checkSingle.Location = new System.Drawing.Point(298, 34);
+            this.checkSingle.Name = "checkSingle";
+            this.checkSingle.Size = new System.Drawing.Size(18, 17);
+            this.checkSingle.TabIndex = 1;
+            this.checkSingle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkSingle.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(213, 9);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(106, 17);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Create singles?";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 319);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.setCode);
             this.Controls.Add(this.boxSetName);
             this.Controls.Add(this.label11);
@@ -283,6 +306,7 @@
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.jsonPath);
             this.Controls.Add(this.destinationPath);
+            this.Controls.Add(this.checkSingle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
@@ -319,6 +343,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox boxSetName;
         private System.Windows.Forms.TextBox setCode;
+        private System.Windows.Forms.CheckBox checkSingle;
+        private System.Windows.Forms.Label label12;
     }
 }
 
