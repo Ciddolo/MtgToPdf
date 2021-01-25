@@ -276,6 +276,54 @@ namespace MtgToPdf
             }
         }
 
+        public Document CreateBlank(string path)
+        {
+            int start, end;
+            if (!int.TryParse(startBlank.Text, out start))
+            {
+                MessageBox.Show("Invalid values", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            if (!int.TryParse(endBlank.Text, out end))
+            {
+                MessageBox.Show("Invalid values", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            if (start > end)
+            {
+                MessageBox.Show("Invalid values", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+
+            }
+
+            iTextSharp.text.Rectangle mySize = new iTextSharp.text.Rectangle(PdfWidth, PdfHeight);
+            Document doc = new Document(mySize, PdfMarginLeft, PdfMarginRight, PdfMarginTop, PdfMarginBottom);
+
+            string pdfPath = path + @"\BlankCards.pdf";
+
+            PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
+            doc.Open();
+
+            for (int i = start; i <= end; i++)
+            {
+                try
+                {
+                    Paragraph paragraph = new Paragraph(i.ToString());
+                    paragraph.Font.Size = PdfFontSize;
+                    doc.Add(paragraph);
+                    doc.NewPage();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            doc.Close();
+
+            return doc;
+        }
+
         public Document CreateSetPdf(string path)
         {
             if (ListOfCards == null)
@@ -370,20 +418,31 @@ namespace MtgToPdf
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            if (!LoadJson())
-                return;
-
             createButton.Text = "Creating PDF...";
             createButton.Enabled = false;
 
-            GetData();
+            if (checkBoxSet.Checked)
+            {
+                if (LoadJson())
+                {
+                    GetData();
 
-            string folderPath = CreateFolder(destinationPath.Text, boxSetName.Text);
-            CreateSetPdf(folderPath);
-            if (checkSingle.Checked)
-                CreateSinglePdf(folderPath);
+                    string folderPath = CreateFolder(destinationPath.Text, boxSetName.Text);
+                    if (CreateSetPdf(folderPath) != null)
+                    {
+                        if (checkSingle.Checked)
+                            CreateSinglePdf(folderPath);
+                        MessageBox.Show("Complete", boxSetName.Text + " To Pdf", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            else if (checkBoxBlank.Checked)
+            {
+                string folderPath = CreateFolder(destinationPath.Text, "NewBlankCards");
+                if (CreateBlank(folderPath) != null)
+                    MessageBox.Show("Complete", boxSetName.Text + " To Pdf", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
-            MessageBox.Show("Complete", boxSetName.Text + " To Pdf", MessageBoxButtons.OK, MessageBoxIcon.Information);
             createButton.Enabled = true;
             createButton.Text = "Create";
         }
@@ -399,16 +458,17 @@ namespace MtgToPdf
             }
         }
 
-        private void jsonPath_DoubleClick(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Json file|*.json", ValidateNames = true })
-            {
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    jsonPath.Text = ofd.FileName;
-                }
-            }
-        }
+        //To manually fetch json
+        //private void jsonPath_DoubleClick(object sender, EventArgs e)
+        //{
+        //    using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Json file|*.json", ValidateNames = true })
+        //    {
+        //        if (ofd.ShowDialog() == DialogResult.OK)
+        //        {
+        //            jsonPath.Text = ofd.FileName;
+        //        }
+        //    }
+        //}
 
         private void boxSetName_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -431,6 +491,16 @@ namespace MtgToPdf
                     return;
                 }
             }
+        }
+
+        private void checkBoxSet_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxBlank.Checked = !checkBoxSet.Checked;
+        }
+
+        private void checkBoxBlank_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxSet.Checked = !checkBoxBlank.Checked;
         }
     }
 }
