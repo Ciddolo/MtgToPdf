@@ -414,6 +414,18 @@ namespace MtgToPdf
             }
         }
 
+        public string GetAvailableName(string rawName)
+        {
+            string[] charsToRemove = new string[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
+
+            string newName = rawName;
+
+            for (int i = 0; i < charsToRemove.Length; i++)
+                newName = newName.Replace(charsToRemove[i], string.Empty);
+
+            return newName;
+        }
+
         //EVENTS
 
         private void createButton_Click(object sender, EventArgs e)
@@ -421,13 +433,16 @@ namespace MtgToPdf
             createButton.Text = "Creating PDF...";
             createButton.Enabled = false;
 
+            boxSetName.Text = GetAvailableName(boxSetName.Text);
+
             if (checkBoxSet.Checked)
             {
                 if (LoadJson())
                 {
                     GetData();
 
-                    string folderPath = CreateFolder(destinationPath.Text, boxSetName.Text);
+                    string newName = GetAvailableName(boxSetName.Text);
+                    string folderPath = CreateFolder(destinationPath.Text, newName);
                     if (CreateSetPdf(folderPath) != null)
                     {
                         if (checkSingle.Checked)
